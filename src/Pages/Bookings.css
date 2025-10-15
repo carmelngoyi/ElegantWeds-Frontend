@@ -1,0 +1,137 @@
+/* src/Pages/Bookings.css */
+
+/* Use color variables from Homepage.css or define them locally */
+:root {
+  --color-primary: #F7F7F7; 
+  --color-accent-1: #9C898C; 
+  --color-accent-2: #A3836B; 
+  --color-text-dark: #333333; 
+  --color-form-bg: #F9F0F2; 
+  --color-error: #B03A2E; 
+}
+
+.bookings-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bookings-main {
+    /* KEY CHANGE 1: Increase max-width to allow the content to stretch further */
+    max-width: 1400px; /* Increased from 1200px to give more overall width */
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px;
+}
+
+/* --- Top Intro Text --- */
+.booking-intro {
+    text-align: center;
+    padding: 20px 10%; /* Add horizontal padding to center the text block */
+    margin-bottom: 30px;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+}
+
+/* ------------------------------------- */
+/* 1. Booking Form Styles */
+/* ------------------------------------- */
+
+.booking-form-section {
+    padding: 0;
+    margin-bottom: 60px;
+}
+
+.booking-form-box {
+    background-color: var(--color-form-bg); 
+    padding: 50px;
+    /* KEY CHANGE 2: Define a specific maximum width for the form box itself */
+    max-width: 750px; 
+    margin: 0 auto; /* Center the form box within the section */
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+    font-size: 1.8em;
+    /* KEY CHANGE 3: Use lighter font weight for the title */
+    font-weight: 300; 
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--color-text-dark);
+}
+
+.form-subtitle {
+    font-size: 0.9em;
+    /* KEY CHANGE 4: Use lighter font weight for paragraph text */
+    font-weight: 300;
+    color: var(--color-text-dark);
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.required-note {
+    font-style: italic;
+    color: var(--color-text-dark);
+    margin-bottom: 25px;
+    font-size: 0.9em;
+    /* Lighter font weight */
+    font-weight: 300; 
+}
+
+.form-label, .notes-info {
+    display: block;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 0.85em;
+    /* Set font weight to thin (often 300 or 400 depending on the font) */
+    font-weight: 400; 
+    color: var(--color-text-dark);
+}
+
+.notes-info {
+    margin-top: 40px;
+    text-align: left; 
+    font-weight: 400;
+    font-size: 1em;
+    /* Make the entire text block thinner */
+    font-weight: 300; 
+}
+
+/* ------------------------------------- */
+/* 2. Contact Details Section */
+/* ------------------------------------- */
+
+.contact-details-section {
+    padding: 50px 20px; /* Add padding to details section for spacing */
+    text-align: center;
+}
+
+.details-title {
+    font-size: 2em;
+    font-weight: 300; /* Lighter font weight */
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    color: var(--color-text-dark);
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    text-align: left;
+    /* Center the grid within the section */
+    max-width: 1000px; 
+    margin: 0 auto;
+}
+
+.detail-column h3 {
+    font-size: 1.1em;
+    font-weight: 500; /* Slightly lighter heading */
+    text-transform: uppercase;
+    color: var(--color-accent-2); 
+    margin-bottom: 15px;
+}
+/* ... (Ensure other media queries are maintained) ... */

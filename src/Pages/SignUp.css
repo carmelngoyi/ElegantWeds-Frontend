@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, #mainDiv {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-size: cover;
+    /* width: 100vw; */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#mainDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: none; 
+}
+
+.signup-form{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+#signup {
+    margin-top: 100px;
+    background-color: antiquewhite;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+#signup h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255,255,255,0.85);
+}
+
+button {
+    background-color: pink;
+    color: black;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #000000;
+    color: white;
+}
+
+p {
+    margin-top: 15px;
+    font-weight: bold;
+}

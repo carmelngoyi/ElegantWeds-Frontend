@@ -1,0 +1,200 @@
+:root {
+  --color-primary: #F7F7F7; 
+  --color-accent-1: #9C898C; 
+  --color-accent-2: #A3836B; 
+  --color-text-dark: #333333; 
+  --color-text-light: #FFFFFF; 
+}
+
+body {
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif; 
+  background-color: var(--color-primary);
+  color: var(--color-text-dark);
+}
+
+.homepage-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage {
+  flex-grow: 1;
+  display: flex;
+  min-height: 80vh; 
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.hero-content-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  padding: 50px 80px 50px 50px;
+  background-color: var(--color-primary); 
+}
+
+.hero-title {
+  font-size: 3.2em; 
+  color: var(--color-text-dark); 
+  margin-bottom: 20px;
+  line-height: 1.1;
+  font-weight: 300; 
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+.hero-subtitle {
+  font-size: 1.2em;
+  color: var(--color-accent-2);
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  align-self: flex-start;
+  padding: 12px 30px;
+  background-color: var(--color-accent-1); 
+  color: var(--color-primary);
+  border: none;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+}
+
+.cta-button:hover {
+  background-color: var(--color-accent-2); /* Soft Taupe on hover */
+}
+
+.image-swiper-column {
+  flex: 1; 
+  display: flex;
+  overflow: hidden; 
+  position: relative;
+}
+
+.image-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-image {
+  position: absolute; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  }
+
+.background-image-container, .background-image {
+  display: none; 
+}
+
+@media (max-width: 900px) {
+  .homepage {
+    flex-direction: column; 
+  }
+
+  .hero-content-column {
+    padding: 40px 30px;
+    order: 2; 
+  }
+
+  .image-swiper-column {
+    min-height: 400px; 
+    order: 1;
+  }
+
+  .hero-title {
+    font-size: 2.5em;
+  }
+}
+
+/* src/Pages/Homepage.css (Only show the relevant updated section) */
+
+/* ------------------------------------- */
+/* --- Dress Feature Grid Styles --- */
+/* ------------------------------------- */
+
+.featured-dresses-section {
+  padding: 50px 0; 
+  margin: 0 auto; 
+}
+
+.featured-dresses-heading {
+  font-size: 2.2em;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--color-text-dark);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0 20px; 
+}
+
+.dress-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  /* NO GAP between cards to make them flush like the screenshot */
+  gap: 0; 
+  /* Reduce side padding for a more edge-to-edge feel */
+  padding: 0 10px; 
+}
+
+.dress-card {
+  text-align: center;
+  background-color: white; 
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  /* Add a very light gray border to simulate the clean separation in the screenshot */
+  border: 1px solid var(--color-primary); /* Use your light background color for a subtle line */
+}
+
+.dress-card:hover {
+  transform: translateY(-5px); 
+}
+
+.dress-image-container {
+  overflow: hidden;
+  height: 0; 
+  /* *** KEY CHANGE HERE: Increased aspect ratio for a much taller image card *** */
+  padding-bottom: 180%; /* Increased from 150% to 180% (or more) for a tall portrait look */
+  position: relative;
+}
+
+.dress-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.dress-name {
+  font-size: 1.1em;
+  font-weight: 400;
+  /* Reduced vertical margin for tighter packing */
+  margin: 10px 0 10px; 
+  color: var(--color-accent-2); 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+/* Media Queries for Responsiveness (adjust padding for smaller screens) */
+@media (max-width: 1200px) {
+  .dress-grid {
+    grid-template-columns: repeat(3, 1fr); 
+    padding: 0 5px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .dress-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}

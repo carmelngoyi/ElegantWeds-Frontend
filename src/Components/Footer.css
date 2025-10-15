@@ -1,0 +1,67 @@
+/* src/Components/Footer.css */
+
+.footer-container {
+  background-color: var(--color-accent-1); /* Muted Mauve background */
+  color: var(--color-primary); /* Off-White text */
+  padding: 40px 50px;
+  border-top: 5px solid var(--color-accent-2); /* Soft Taupe accent line */
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin: 15px;
+}
+
+.footer-h1 { /* Used for Marie Élégance logo */
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--color-primary);
+}
+
+.footer-h2 {
+  font-size: 1.2em;
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.footer-p {
+  margin: 5px 0;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+/* Socials styling */
+.footer-socials {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.footer-social-link {
+  color: var(--color-primary);
+  font-size: 1.5em;
+  transition: color 0.3s;
+}
+
+.footer-social-link:hover {
+  color: var(--color-text-dark); /* Dark text on hover */
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 0.8em;
+}

@@ -1,0 +1,337 @@
+/* Variables for an elegant, bridal theme */
+:root {
+    --color-bg-light: #fefefe;
+    --color-bg-faded: #f7f7f7;
+    --color-primary-text: #333333;
+    --color-secondary-text: #6b6b6b;
+    --color-accent-pink: #d946ef; /* Soft Pink/Purple */
+    --color-accent-pink-hover: #c026d9;
+    --color-border: #e5e7eb;
+    --color-star-fill: #f59e0b; /* Amber */
+    --color-star-empty: #d1d5db; /* Gray */
+    --color-success: #10b981;
+    --color-error: #ef4444;
+}
+
+/* -------------------------------------
+   1. General Layout and Typography 
+   ------------------------------------- */
+
+.reviews-container {
+    min-height: 100vh;
+    background-color: var(--color-bg-faded);
+    font-family: 'Inter', sans-serif;
+    /* You may need to import the Inter font in your main index.html/css */
+}
+
+.reviews-header-title {
+    background-color: var(--color-bg-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 24px 16px;
+}
+
+.page-title {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 2rem;
+    font-weight: 300; /* Lighter font weight for elegance */
+    color: var(--color-primary-text);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0 16px;
+}
+
+.reviews-main {
+    max-width: 900px; /* Max width for central content */
+    margin: 0 auto;
+    padding: 48px 16px;
+}
+
+/* -------------------------------------
+   2. Review Form (Signed In User) 
+   ------------------------------------- */
+
+.review-form-box {
+    background-color: var(--color-bg-light);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border);
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-primary-text);
+    margin-bottom: 20px;
+    letter-spacing: 0.05em;
+}
+
+/* Rating Picker */
+.rating-picker {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.rating-label {
+    color: var(--color-secondary-text);
+    margin-right: 16px;
+    font-size: 0.875rem;
+}
+
+.star-selector-container {
+    display: flex;
+    cursor: pointer;
+}
+
+.star-selector-icon {
+    transition: color 0.15s, fill 0.15s;
+    color: var(--color-star-empty);
+    fill: transparent;
+    cursor: pointer;
+}
+
+.star-selector-icon:hover {
+    color: var(--color-star-fill);
+    fill: var(--color-star-fill);
+}
+
+.star-selector-icon.selected {
+    color: var(--color-star-fill);
+    fill: var(--color-star-fill);
+}
+
+/* Text Area */
+.review-textarea {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    transition: all 0.2s;
+    resize: none;
+    color: var(--color-primary-text);
+}
+
+.review-textarea:focus {
+    outline: none;
+    border-color: var(--color-accent-pink);
+    box-shadow: 0 0 0 1px var(--color-accent-pink);
+}
+
+/* Submission Controls */
+.submission-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.submit-button {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-accent-pink);
+    color: white;
+    font-weight: 600;
+    padding: 8px 24px;
+    border-radius: 9999px; /* Rounded pill shape */
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover:not(:disabled) {
+    background-color: var(--color-accent-pink-hover);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.icon-mr {
+    margin-right: 8px;
+}
+
+/* Submission Status */
+.submission-status {
+    font-size: 0.875rem;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.submission-status.submitting {
+    color: var(--color-accent-pink);
+}
+.submission-status.success {
+    color: var(--color-success);
+    font-weight: 500;
+}
+.submission-status.error {
+    color: var(--color-error);
+    font-weight: 500;
+}
+
+/* Spinner for loading */
+.spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--color-accent-pink);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Signed Out Message */
+.signed-out-message {
+    background-color: rgba(255, 240, 245, 0.5); /* Very light pink background */
+    border: 1px solid #fbcfe8; /* Light pink border */
+    padding: 24px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+.signed-out-title {
+    color: #9d174d; /* Darker pink text */
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.signed-out-text {
+    font-size: 0.875rem;
+    color: #be185d;
+}
+
+/* -------------------------------------
+   3. Reviews List 
+   ------------------------------------- */
+
+.reviews-list-header {
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--color-accent-pink);
+    padding-bottom: 8px;
+}
+
+.list-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--color-primary-text);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.loading-message, .empty-message {
+    text-align: center;
+    color: var(--color-secondary-text);
+    padding: 40px;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Review Card */
+.review-card {
+    background-color: var(--color-bg-light);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border);
+    transition: all 0.3s;
+}
+
+.review-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.reviewer-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.reviewer-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-icon {
+    color: var(--color-accent-pink);
+}
+
+.reviewer-name {
+    font-weight: 600;
+    color: var(--color-primary-text);
+    font-size: 1.125rem;
+}
+
+/* Rating Stars */
+.rating-stars-container {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star-filled {
+    color: var(--color-star-fill);
+    fill: var(--color-star-fill);
+}
+
+.star-empty {
+    color: var(--color-star-empty);
+    fill: transparent;
+}
+
+.review-text {
+    color: var(--color-secondary-text);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.review-date {
+    font-size: 0.75rem;
+    color: #9ca3af; /* Light gray */
+    margin-top: 16px;
+    text-align: right;
+}
+
+/* -------------------------------------
+   4. Media Queries for Responsiveness 
+   ------------------------------------- */
+
+@media (min-width: 768px) {
+    .reviews-header-title {
+        padding: 32px 16px;
+    }
+    .page-title {
+        padding: 0 32px;
+    }
+    .reviews-main {
+        padding: 64px 32px;
+    }
+    .review-form-box {
+        padding: 40px;
+    }
+    .rating-picker {
+        /* Align items better on wider screens */
+        justify-content: flex-start;
+    }
+}

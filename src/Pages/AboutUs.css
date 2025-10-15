@@ -1,0 +1,166 @@
+:root {
+  --color-primary: #F7F7F7; 
+  --color-accent-2: #A3836B; 
+  --color-text-dark: #333333; 
+  --color-text-light: #FFFFFF;
+}
+
+
+/* ------------------------------------- */
+/* 1. Hero/Banner Section */
+/* ------------------------------------- */
+
+.about-hero-banner {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.banner-image {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  /* Use filter to subtly gray/lighten the image for better text contrast, 
+     matching the screenshot */
+  filter: brightness(0.8) contrast(1.1); 
+}
+
+.quote-overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  padding: 20px;
+  max-width: 800px;
+}
+
+.quote-text {
+  font-size: 2.5em;
+  font-weight: 500;
+  color: var(--color-text-light); /* White text */
+  line-height: 1.3;
+  text-transform: uppercase;
+  /* Subtle shadow for contrast on the image */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); 
+}
+
+/* ------------------------------------- */
+/* 2. Introduction Section */
+/* ------------------------------------- */
+
+.about-intro-section {
+  padding: 60px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-intro-heading {
+  font-size: 3em;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  color: var(--color-text-dark);
+}
+
+.intro-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 40px;
+  line-height: 1.8;
+  font-size: 1em;
+}
+
+.intro-column p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+/* ------------------------------------- */
+/* 3. Creator Bio Section */
+/* ------------------------------------- */
+
+.creator-bio-section {
+  background-color: var(--color-primary); /* Light background */
+  padding: 80px 5%;
+}
+
+.bio-split-content {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center; /* Vertically align items */
+  gap: 60px;
+}
+
+.bio-image-column {
+  flex: 1; /* Takes up half the space */
+  max-width: 50%;
+}
+
+.founder-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.bio-text-column {
+  flex: 1; /* Takes up the other half */
+  padding-left: 20px;
+}
+
+.founder-name {
+  font-size: 0.9em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-accent-2); /* Soft Taupe accent */
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.founder-quote {
+  font-size: 2.5em;
+  font-weight: 400;
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-text-dark);
+}
+
+/* ------------------------------------- */
+/* Media Queries for Responsiveness */
+/* ------------------------------------- */
+
+@media (max-width: 900px) {
+  .intro-content-grid {
+    grid-template-columns: 1fr; /* Stacks columns on smaller screens */
+  }
+
+  .creator-bio-section {
+      padding: 40px 5%;
+  }
+
+  .bio-split-content {
+    flex-direction: column; /* Stacks image and text vertically */
+    gap: 40px;
+  }
+  
+  .bio-image-column, .bio-text-column {
+      max-width: 100%;
+  }
+
+  .founder-quote {
+    font-size: 1.8em;
+  }
+
+  .about-intro-heading {
+    font-size: 2em;
+  }
+}
