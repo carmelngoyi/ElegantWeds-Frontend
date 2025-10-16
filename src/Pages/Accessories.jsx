@@ -7,23 +7,13 @@ import './Accessories.css';
 import veil from '../assets/bride-veil.jpg';
 
 
-
-
-
-// const MOCK_IMAGE_URL = (id) => `https://placehold.co/400x500/A3836B/FFFFFF?text=Dress+${id}`;
-
 const BOOKING_LINK = "/bookings";
-
-
 
 const AccessoryDetailModal = ({ accessory, onClose }) => {
 
 if (!accessory) return null;
 
-
-
 return (
-
 <div className="modal-overlay" onClick={onClose}>
 
 <div className="modal-content" onClick={e => e.stopPropagation()}>

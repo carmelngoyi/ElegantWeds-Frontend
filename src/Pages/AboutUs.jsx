@@ -9,9 +9,6 @@ const AboutUs = () => {
   return (
     <div className="about-us-container">
 
-      {/* ------------------------------------- */}
-      {/* 1. Hero/Banner Section (Quote Overlay) */}
-      {/* ------------------------------------- */}
       <section className="about-hero-banner">
         <div className="banner-image-container">
           <img 
@@ -25,9 +22,6 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* ------------------------------------- */}
-      {/* 2. Introduction Section (Two Columns) */}
-      {/* ------------------------------------- */}
       <section className="about-intro-section">
         <h2 className="about-intro-heading">ABOUT OUR BRIDAL BOUTIQUE</h2>
         <div className="intro-content-grid">
@@ -40,9 +34,6 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* ------------------------------------- */}
-      {/* 3. Creator Bio Section (Image/Text Split) */}
-      {/* ------------------------------------- */}
       <section className="creator-bio-section">
         <div className="bio-split-content">
           <div className="bio-image-column">

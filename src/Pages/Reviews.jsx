@@ -11,7 +11,10 @@ const MOCK_USER = {
   base64AuthToken: 'amFuZUBleGFtcGxlLmNvbTpwYXNzd29yZDEyMw==' 
 };
 
-const API_BASE_URL = 'http://localhost:3000'; 
+const API_BASE = import.meta.env.VITE_API_URL;
+
+const response = await fetch(`${API_BASE}`);
+ 
 
 const RatingStars = ({ rating }) => {
   const fullStars = Math.floor(rating);
