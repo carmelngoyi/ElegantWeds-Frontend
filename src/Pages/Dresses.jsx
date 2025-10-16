@@ -33,12 +33,8 @@ return (
     </div>
     </div>
     </div>
-
     );
-
     };
-
-
 
     const Dresses = () => {
         const [dresses, setDresses] = useState([]);

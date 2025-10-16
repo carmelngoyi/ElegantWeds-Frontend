@@ -66,7 +66,7 @@ body {
 }
 
 .cta-button:hover {
-  background-color: var(--color-accent-2); /* Soft Taupe on hover */
+  background-color: var(--color-accent-2); 
 }
 
 .image-swiper-column {
@@ -113,11 +113,6 @@ body {
   }
 }
 
-/* src/Pages/Homepage.css (Only show the relevant updated section) */
-
-/* ------------------------------------- */
-/* --- Dress Feature Grid Styles --- */
-/* ------------------------------------- */
 
 .featured-dresses-section {
   padding: 50px 0; 
@@ -138,9 +133,7 @@ body {
 .dress-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
-  /* NO GAP between cards to make them flush like the screenshot */
   gap: 0; 
-  /* Reduce side padding for a more edge-to-edge feel */
   padding: 0 10px; 
 }
 
@@ -149,8 +142,7 @@ body {
   background-color: white; 
   transition: transform 0.3s ease;
   cursor: pointer;
-  /* Add a very light gray border to simulate the clean separation in the screenshot */
-  border: 1px solid var(--color-primary); /* Use your light background color for a subtle line */
+  border: 1px solid var(--color-primary); 
 }
 
 .dress-card:hover {
@@ -160,8 +152,7 @@ body {
 .dress-image-container {
   overflow: hidden;
   height: 0; 
-  /* *** KEY CHANGE HERE: Increased aspect ratio for a much taller image card *** */
-  padding-bottom: 180%; /* Increased from 150% to 180% (or more) for a tall portrait look */
+  padding-bottom: 180%; 
   position: relative;
 }
 
@@ -177,7 +168,6 @@ body {
 .dress-name {
   font-size: 1.1em;
   font-weight: 400;
-  /* Reduced vertical margin for tighter packing */
   margin: 10px 0 10px; 
   color: var(--color-accent-2); 
   text-transform: uppercase;
@@ -185,7 +175,6 @@ body {
 }
 
 
-/* Media Queries for Responsiveness (adjust padding for smaller screens) */
 @media (max-width: 1200px) {
   .dress-grid {
     grid-template-columns: repeat(3, 1fr); 
