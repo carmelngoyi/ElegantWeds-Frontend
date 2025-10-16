@@ -82,7 +82,7 @@ const Bookings = () => {
               ))}
             </select>
 
-            <label className="form-label" htmlFor="otherFittings">HAVE YOU BEEN FOR OTHER BRIDAL FITTINGS YET? *</label>
+            <label className="form-label" htmlFor="otherFittings">HAVE YOU BEEN ON OTHER BRIDAL FITTINGS YET? *</label>
             <select id="otherFittings" name="otherFittings" value={formData.otherFittings} onChange={handleChange} className="form-input form-select" required>
               <option value="" disabled>Select an option</option>
               <option value="YES">YES</option>
@@ -98,7 +98,7 @@ const Bookings = () => {
               <option value="R65k+">R65 000 +</option>
             </select>
 
-            <label className="form-label" htmlFor="appointmentPreference">I WOULD PREFER AN APPOINTMENT IN THE</label>
+            <label className="form-label" htmlFor="appointmentPreference">I WOULD PREFER AN APPOINTMENT DURING THE</label>
             <select id="appointmentPreference" name="appointmentPreference" value={formData.appointmentPreference} onChange={handleChange} className="form-input form-select">
               <option value="" disabled>Select a preference</option>
               <option value="WEEK">WEEK</option>

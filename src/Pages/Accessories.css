@@ -1,49 +1,27 @@
 :root {
 
---color-primary-light: #F9F0F2; /* Soft pinkish white */
-
---color-accent-1: #A3836B; /* Muted Gold/Brown - Primary accent */
-
+--color-primary-light: #F9F0F2; 
+--color-accent-1: #A3836B;
 --color-text-dark: #333333;
-
 --color-text-light: #555555;
-
---color-button-hover: #9C898C; /* Muted Mauve */
-
+--color-button-hover: #9C898C; 
 --color-background: #FFFFFF;
-
 }
-
-
 
 .accessories-page-container {
-
 min-height: 100vh;
-
 display: flex;
-
 flex-direction: column;
-
 font-family: 'Inter', sans-serif;
-
 background-color: var(--color-background);
-
 }
 
-
-
 .accessories-main-content {
-
 flex-grow: 1;
-
 max-width: 1400px;
-
 margin: 0 auto;
-
 padding: 40px 20px;
-
 width: 100%;
-
 }
 
 

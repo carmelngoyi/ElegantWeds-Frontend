@@ -12,8 +12,7 @@ const MOCK_USER = {
 };
 
 const API_BASE = import.meta.env.VITE_API_URL;
-
-const response = await fetch(`${API_BASE}`);
+const response = await fetch(`${API_BASE}/reviews`);
  
 
 const RatingStars = ({ rating }) => {
