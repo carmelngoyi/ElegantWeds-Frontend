@@ -23,8 +23,6 @@
   width: 100%;
   height: 60vh;
   object-fit: cover;
-  /* Use filter to subtly gray/lighten the image for better text contrast, 
-     matching the screenshot */
   filter: brightness(0.8) contrast(1.1); 
 }
 
@@ -42,16 +40,11 @@
 .quote-text {
   font-size: 2.5em;
   font-weight: 500;
-  color: var(--color-text-light); /* White text */
+  color: var(--color-text-light); 
   line-height: 1.3;
   text-transform: uppercase;
-  /* Subtle shadow for contrast on the image */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); 
 }
-
-/* ------------------------------------- */
-/* 2. Introduction Section */
-/* ------------------------------------- */
 
 .about-intro-section {
   padding: 60px 5%;
@@ -69,22 +62,18 @@
 
 .intro-content-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-columns: 1fr 1fr; 
   gap: 40px;
   line-height: 1.8;
   font-size: 1em;
 }
 
 .intro-column p {
-    margin: 0; /* Remove default paragraph margin */
+    margin: 0; 
 }
 
-/* ------------------------------------- */
-/* 3. Creator Bio Section */
-/* ------------------------------------- */
-
 .creator-bio-section {
-  background-color: var(--color-primary); /* Light background */
+  background-color: var(--color-primary); 
   padding: 80px 5%;
 }
 
@@ -92,12 +81,12 @@
   display: flex;
   max-width: 1200px;
   margin: 0 auto;
-  align-items: center; /* Vertically align items */
+  align-items: center; 
   gap: 60px;
 }
 
 .bio-image-column {
-  flex: 1; /* Takes up half the space */
+  flex: 1; 
   max-width: 50%;
 }
 
@@ -108,7 +97,7 @@
 }
 
 .bio-text-column {
-  flex: 1; /* Takes up the other half */
+  flex: 1;
   padding-left: 20px;
 }
 
@@ -116,7 +105,7 @@
   font-size: 0.9em;
   font-weight: 600;
   text-transform: uppercase;
-  color: var(--color-accent-2); /* Soft Taupe accent */
+  color: var(--color-accent-2); 
   margin-bottom: 5px;
   letter-spacing: 2px;
 }
@@ -130,13 +119,74 @@
   color: var(--color-text-dark);
 }
 
-/* ------------------------------------- */
-/* Media Queries for Responsiveness */
-/* ------------------------------------- */
+.creator-bio-and-service-section {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.creator-bio-and-service-section .content-container {
+    padding: 0;
+}
+
+.creator-bio-and-service-section .section-title {
+    font-size: 3em;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: var(--color-text-dark);
+}
+
+.creator-bio-and-service-section .content-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 40px;
+    line-height: 1.8;
+    font-size: 1em;
+}
+
+.creator-bio-and-service-section .column p {
+    margin-bottom: 20px; 
+}
+
+.creator-bio-and-service-section .bio-column .quote {
+    font-style: italic;
+}
+
+.creator-bio-and-service-section .bio-column strong {
+    font-weight: 600; 
+}
+
+.creator-bio-and-service-section .service-column .booking-link,
+.creator-bio-and-service-section .service-column .booking-cta {
+    margin-top: 25px; 
+    line-height: 1.5;
+}
+
+.creator-bio-and-service-section .service-column .booking-link a {
+    color: var(--color-accent-2); 
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.creator-bio-and-service-section .service-column .booking-cta {
+    font-style: italic;
+    font-weight: 600; 
+}
+
+@media (max-width: 900px) {
+    .creator-bio-and-service-section .content-columns {
+        grid-template-columns: 1fr; 
+    }
+
+    .creator-bio-and-service-section .section-title {
+        font-size: 2em;
+    }
+}
 
 @media (max-width: 900px) {
   .intro-content-grid {
-    grid-template-columns: 1fr; /* Stacks columns on smaller screens */
+    grid-template-columns: 1fr; 
   }
 
   .creator-bio-section {
@@ -144,7 +194,7 @@
   }
 
   .bio-split-content {
-    flex-direction: column; /* Stacks image and text vertically */
+    flex-direction: column; 
     gap: 40px;
   }
   
