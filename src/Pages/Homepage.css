@@ -64,6 +64,7 @@ body {
   cursor: pointer;
   transition: background-color 0.3s;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .cta-button:hover {

@@ -1,8 +1,32 @@
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import "./SignUp.css";
-import { AuthContext } from "./AuthContext.jsx";
+import "./SignUp.css"; 
+import { AuthContext } from "./AuthContext.jsx"; 
+
+const AuthContext = React.createContext({ signIn: () => {} });
+const CustomAuthContextProvider = ({ children }) => {
+    const signIn = (user) => {
+        console.log("User signed in:", user);
+    };
+    return <AuthContext.Provider value={{ signIn }}>{children}</AuthContext.Provider>;
+};
+
+const API_BASE_URL = "https://elegantweds-backend.onrender.com"; 
+
+const AlertModal = ({ message, onClose }) => {
+  if (!message) return null;
+
+  return (
+    <div className="alert-modal-backdrop">
+      <div className="alert-modal-content">
+        <p className="alert-title">{message.includes("Successful") ? "Success" : "Signup Failed"}</p>
+        <p className="alert-message">{message}</p>
+        <button onClick={onClose} className="alert-button">OK</button>
+      </div>
+    </div>
+  );
+};
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -11,9 +35,15 @@ const Signup = () => {
     password: "",
     confirmPassword: ""
   });
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  
   const [message, setMessage] = useState("");
+  
   const navigate = useNavigate();
-  const { signIn } = useContext(AuthContext); 
+  const authContext = useContext(AuthContext);
+  const signIn = authContext?.signIn || (() => console.log("AuthContext not fully implemented."));
+
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -21,92 +51,122 @@ const Signup = () => {
       [e.target.name]: e.target.value
     }));
   };
+  
+  const displayAlert = (msg) => {
+    setAlertMessage(msg);
+    setShowAlert(true);
+  };
+  
+  const closeAlert = () => {
+    setShowAlert(false);
+    
+    if (alertMessage.includes("Successful")) {
+        setAlertMessage(""); 
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      window.alert("Passwords do not match!");
+      displayAlert("Passwords do not match!");
       setMessage("Passwords do not match!");
       return;
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/signup", formData);
+      const res = await axios.post(`${API_BASE_URL}/signup`, formData);
 
       if (res.status === 201) {
-        window.alert("Signup Successful!");
-        setMessage("Signup Successful!");
-        setFormData({
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: ""
-        });
-
+        displayAlert("Signup Successful!"); 
+        
+        // Use the actual sign-in function here
         signIn(res.data.user);
-
-        navigate("/homepage");
+        
+        // Wait for the user to close the modal before navigating
+        // Or navigate after a short delay if the modal is for success feedback only
+        setTimeout(() => navigate("/homepage"), 1500); 
+        
       } else {
-        window.alert("Something went wrong. Please try again.");
+        displayAlert("Something went wrong. Please try again.");
         setMessage("Signup failed: Unexpected response.");
       }
     } catch (err) {
-      const errorMsg = err.response?.data?.error || err.message;
-      window.alert("Signup Failed: " + errorMsg);
+      console.error("Signup error details:", err);
+      
+      let errorMsg;
+      if (err.code === 'ERR_NETWORK') {
+          // This catches the true "Network Error" (CORS, DNS, or localhost issue)
+          errorMsg = `Network Error. Please verify the API_BASE_URL constant and ensure CORS is enabled on the backend.`;
+      } else {
+          errorMsg = err.response?.data?.error || err.message;
+      }
+
+      displayAlert("Signup Failed: " + errorMsg);
       setMessage("Signup Failed: " + errorMsg);
     }
   };
 
   return (
-    <div id="mainDiv">
-      <div id="signup">
-        <h1>Sign Up</h1>
-        <form onSubmit={handleSubmit} className="signup-form">
-          <input
-            name="name"
-            placeholder="Username"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          <br /><br />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
+    <React.Fragment>
+      <style>{internalStyles}</style>
+
+      <div id="mainDiv">
+        <div id="signup">
+          <h1>Sign Up</h1>
+          <form onSubmit={handleSubmit} className="signup-form">
+            <input
+              name="name"
+              placeholder="Username"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <br /><br />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          
+            <br /><br />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <br /><br />
+            <input
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            <br /><br />
+            <button type="submit">Sign Up</button>
+            <p className="login">
+              Already have an account? <Link to="/Login">Sign In</Link>
+            </p>
+          </form>
+          {message && <p>{message}</p>}
+        </div>
         
-          <br /><br />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
+        {showAlert && (
+          <AlertModal 
+            message={alertMessage} 
+            onClose={closeAlert} 
           />
-          <br /><br />
-          <input
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-          <br /><br />
-          <button type="submit">Sign Up</button>
-          <p className="login">
-            Already have an account? <Link to="/Login">Sign In</Link>
-          </p>
-        </form>
-        {message && <p>{message}</p>}
+        )}
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

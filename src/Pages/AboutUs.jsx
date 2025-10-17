@@ -62,7 +62,7 @@ const AboutUs = () => {
             <div className="column service-column">
               <p>Through our one-on-one styling and consulting services, I provide my brides and their families with the best possible wedding dress shopping experience; that means the bride and her family have the bridal boutique shop to themselves for the entire appointment time. Because your wedding dress purchase is a once-in-a-lifetime event, you deserve the sole attention of a professional. At Mariés Elégants our attention to detail and our professional designing services make Mariés Elégants Couture one of the top bridal studio's in South Africa.</p>
               <p>We invite you to book with us, meet myself and my team of designers and let us create you something magical for your special day."</p>
-              <p className="booking-link">To schedule a bridal appointment at our lovely bridal boutique please <a href="/contact">contact us</a>.</p>
+              <p className="booking-link">To schedule a bridal appointment at our lovely bridal boutique please <a href="/bookings">book an appointment</a>.</p>
               <p className="booking-cta">We look forward to meeting all our beautiful new brides-to-be!</p>
             </div>
           </div>
