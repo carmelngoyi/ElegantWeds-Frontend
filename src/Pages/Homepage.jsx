@@ -33,7 +33,7 @@ const Homepage = () => {
           <p className="hero-subtitle">
             Crafting the dress of your dreams for the most unforgettable day. Hire or purchase your perfect wedding gown with us.
           </p>
-          <button className="cta-button">View Collection</button>
+          <button className="cta-button"><a href="/dresses">View Our Collections</a></button>
         </div>
 
         <div className="image-swiper-column">
