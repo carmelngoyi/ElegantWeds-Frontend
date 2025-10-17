@@ -2,6 +2,7 @@
   margin: 0;
   font-family: 'Segoe UI', Tahoma, sans-serif;
   background-color:antiquewhite;
+  box-sizing: border-box;
 }
 
 .page {
