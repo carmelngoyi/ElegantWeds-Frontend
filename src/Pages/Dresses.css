@@ -199,7 +199,7 @@ color: var(--color-text-light);
 }
 
 .modal-description-block p.description {
-  color: var(--color-text-light) !important; 
+  color: var(--color-text-dark) !important; 
 }
 
 .modal-booking-button {
