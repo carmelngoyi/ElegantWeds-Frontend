@@ -1,51 +1,37 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body, #mainDiv {
+.signup-container {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-size: cover;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-}
-
-#mainDiv {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     background: none; 
-}
-
-.signup-form{
-    width: 400px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .signup-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
-}
-
-#signup {
-    margin-top: 100px;
+    width: 100%;
+    max-width: 450px;
+  }
+  #signup {
     background-color: antiquewhite;
     padding: 30px;
     border-radius: 12px;
     width: 100%;
-    max-width: 450px;
     text-align: center;
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-}
-
-#signup h2 {
+  }
+  #signup h2 {
     margin-bottom: 20px;
     color: #333;
-}
-
-input {
+    font-size: 1.8rem;
+  }
+  .input-field input {
     width: 100%;
     padding: 12px 15px;
     margin: 10px 0;
@@ -53,9 +39,9 @@ input {
     border-radius: 8px;
     font-size: 16px;
     background: rgba(255,255,255,0.85);
-}
-
-button {
+    box-sizing: border-box;
+  }
+  .signup-button {
     background-color: pink;
     color: black;
     padding: 12px 20px;
@@ -64,14 +50,49 @@ button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-}
-
-button:hover {
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .signup-button:hover {
     background-color: #000000;
     color: white;
-}
-
-p {
+  }
+  .status-message {
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .status-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  .status-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  .link-text {
     margin-top: 15px;
     font-weight: bold;
-}
+    color: #333;
+  }
+  .link-text a {
+    color: pink;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .link-text a:hover {
+    color: #000000;
+    text-decoration: underline;
+  }
+  .loader-icon {
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+  }
+  @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+  }
