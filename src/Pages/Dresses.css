@@ -198,6 +198,10 @@ line-height: 1.6;
 color: var(--color-text-light);
 }
 
+.modal-description-block p.description {
+  color: var(--color-primary-light) !important; 
+}
+
 .modal-booking-button {
 display: inline-flex;
 align-items: center;
