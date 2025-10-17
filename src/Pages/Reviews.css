@@ -1,27 +1,22 @@
-/* Variables for an elegant, bridal theme */
 :root {
     --color-bg-light: #fefefe;
     --color-bg-faded: #f7f7f7;
     --color-primary-text: #333333;
     --color-secondary-text: #6b6b6b;
-    --color-accent-pink: #d946ef; /* Soft Pink/Purple */
+    --color-accent-pink: #d946ef;
     --color-accent-pink-hover: #c026d9;
     --color-border: #e5e7eb;
-    --color-star-fill: #f59e0b; /* Amber */
-    --color-star-empty: #d1d5db; /* Gray */
+    --color-star-fill: #f59e0b; 
+    --color-star-empty: #d1d5db; 
     --color-success: #10b981;
     --color-error: #ef4444;
 }
 
-/* -------------------------------------
-   1. General Layout and Typography 
-   ------------------------------------- */
 
 .reviews-container {
     min-height: 100vh;
     background-color: var(--color-bg-faded);
     font-family: 'Inter', sans-serif;
-    /* You may need to import the Inter font in your main index.html/css */
 }
 
 .reviews-header-title {
@@ -34,7 +29,7 @@
     max-width: 1200px;
     margin: 0 auto;
     font-size: 2rem;
-    font-weight: 300; /* Lighter font weight for elegance */
+    font-weight: 300; 
     color: var(--color-primary-text);
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -42,14 +37,10 @@
 }
 
 .reviews-main {
-    max-width: 900px; /* Max width for central content */
+    max-width: 900px; 
     margin: 0 auto;
     padding: 48px 16px;
 }
-
-/* -------------------------------------
-   2. Review Form (Signed In User) 
-   ------------------------------------- */
 
 .review-form-box {
     background-color: var(--color-bg-light);
@@ -69,7 +60,6 @@
     letter-spacing: 0.05em;
 }
 
-/* Rating Picker */
 .rating-picker {
     display: flex;
     align-items: center;
@@ -104,7 +94,6 @@
     fill: var(--color-star-fill);
 }
 
-/* Text Area */
 .review-textarea {
     width: 100%;
     padding: 16px;
@@ -121,7 +110,6 @@
     box-shadow: 0 0 0 1px var(--color-accent-pink);
 }
 
-/* Submission Controls */
 .submission-controls {
     display: flex;
     justify-content: flex-end;
@@ -136,7 +124,7 @@
     color: white;
     font-weight: 600;
     padding: 8px 24px;
-    border-radius: 9999px; /* Rounded pill shape */
+    border-radius: 9999px;
     transition: all 0.3s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: none;
@@ -157,7 +145,6 @@
     margin-right: 8px;
 }
 
-/* Submission Status */
 .submission-status {
     font-size: 0.875rem;
     margin-right: 16px;
@@ -177,7 +164,6 @@
     font-weight: 500;
 }
 
-/* Spinner for loading */
 .spinner {
     display: inline-block;
     width: 1rem;
@@ -193,17 +179,16 @@
     to { transform: rotate(360deg); }
 }
 
-/* Signed Out Message */
 .signed-out-message {
-    background-color: rgba(255, 240, 245, 0.5); /* Very light pink background */
-    border: 1px solid #fbcfe8; /* Light pink border */
+    background-color: rgba(255, 240, 245, 0.5); 
+    border: 1px solid #fbcfe8; 
     padding: 24px;
     border-radius: 8px;
     margin-bottom: 40px;
     text-align: center;
 }
 .signed-out-title {
-    color: #9d174d; /* Darker pink text */
+    color: #9d174d; 
     font-weight: 500;
     margin-bottom: 4px;
 }
@@ -211,10 +196,6 @@
     font-size: 0.875rem;
     color: #be185d;
 }
-
-/* -------------------------------------
-   3. Reviews List 
-   ------------------------------------- */
 
 .reviews-list-header {
     margin-bottom: 32px;
@@ -242,7 +223,6 @@
     gap: 24px;
 }
 
-/* Review Card */
 .review-card {
     background-color: var(--color-bg-light);
     padding: 24px;
@@ -281,7 +261,6 @@
     font-size: 1.125rem;
 }
 
-/* Rating Stars */
 .rating-stars-container {
     display: flex;
     align-items: center;
@@ -308,14 +287,10 @@
 
 .review-date {
     font-size: 0.75rem;
-    color: #9ca3af; /* Light gray */
+    color: #9ca3af; 
     margin-top: 16px;
     text-align: right;
 }
-
-/* -------------------------------------
-   4. Media Queries for Responsiveness 
-   ------------------------------------- */
 
 @media (min-width: 768px) {
     .reviews-header-title {
@@ -331,7 +306,6 @@
         padding: 40px;
     }
     .rating-picker {
-        /* Align items better on wider screens */
         justify-content: flex-start;
     }
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Send, User, Star } from 'lucide-react';
 import './Reviews.css';
 import Navbar from '../Components/Navbar'; 
-import Footer from '../Components/Footer'; 
+import Footer from '../Components/Footer';
 
 const MOCK_USER = {
   _id: '654321fedcba9876543210', 
@@ -11,7 +11,9 @@ const MOCK_USER = {
   base64AuthToken: 'amFuZUBleGFtcGxlLmNvbTpwYXNzd29yZDEyMw==' 
 };
 
-const API_BASE = "https://elegantweds-backend.onrender.com"; 
+const API_BASE = import.meta.env.VITE_API_URL;
+const response = await fetch(`${API_BASE}/reviews`);
+ 
 
 const RatingStars = ({ rating }) => {
   const fullStars = Math.floor(rating);
@@ -22,12 +24,11 @@ const RatingStars = ({ rating }) => {
       <Star 
         key={i} 
         size={18} 
-        className={`star-icon ${i < fullStars ? 'star-filled' : 'star-empty'}`}
-        style={{ fill: i < fullStars ? 'gold' : 'transparent', stroke: 'gold' }} 
+        className={i < fullStars ? 'star-filled' : 'star-empty'}
       />
     );
   }
-  return <div className="rating-stars-container flex space-x-0.5">{stars}</div>;
+  return <div className="rating-stars-container">{stars}</div>;
 };
 
 const App = () => {
@@ -36,8 +37,7 @@ const App = () => {
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(5);
   const [isLoading, setIsLoading] = useState(true);
-  const [submissionStatus, setSubmissionStatus] = useState(null); 
-  const [fetchError, setFetchError] = useState(null);
+  const [submissionStatus, setSubmissionStatus] = useState(null); // 'success', 'error', 'submitting'
 
   useEffect(() => {
     fetchReviews();
@@ -47,28 +47,18 @@ const App = () => {
   const fetchReviews = async () => {
     try {
       setIsLoading(true);
-      setFetchError(null);
-      const response = await fetch(`${API_BASE}/reviews`); 
-
+      const response = await fetch(`${API_BASE_URL}/reviews`);
       if (!response.ok) {
-        console.error('Failed to fetch reviews status:', response.status);
-        throw new Error(`Failed to fetch reviews: Status ${response.status}`);
+        throw new Error('Failed to fetch reviews');
       }
-      
       const data = await response.json();
       setReviews(data.reverse()); 
     } catch (error) {
       console.error('Error fetching reviews:', error);
-      if (error.message.includes('Failed to fetch')) {
-        setFetchError('Connection Error: Cannot reach the backend API. Check API_BASE URL and CORS settings.');
-      } else {
-        setFetchError(error.message);
-      }
     } finally {
       setIsLoading(false);
     }
   };
-
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     if (!reviewText || !isUserSignedIn) return;
@@ -78,12 +68,10 @@ const App = () => {
     const newReview = {
       rating: rating,
       reviewText: reviewText,
-      userId: MOCK_USER._id,
-      userName: MOCK_USER.name, 
     };
 
     try {
-      const response = await fetch(`${API_BASE}/reviews`, {
+      const response = await fetch(`${API_BASE_URL}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,14 +81,9 @@ const App = () => {
       });
 
       if (!response.ok) {
-        let errorData = {};
-        try {
-            errorData = await response.json();
-        } catch (e) {
-        }
-        
-        console.error("Submission failed. Status:", response.status, "Error data:", errorData);
-        throw new Error(errorData.error || `Failed to post review. Status: ${response.status}`);
+        const errorText = await response.text();
+        console.error("Submission failed:", errorText);
+        throw new Error('Unauthorized or failed to post review.');
       }
 
       const result = await response.json();
@@ -111,18 +94,12 @@ const App = () => {
       setSubmissionStatus('success');
 
     } catch (error) {
-      let displayMsg = error.message;
-       if (error.message.includes('Failed to fetch')) {
-            displayMsg = 'Connection Error: Cannot reach API. Check URL/CORS.';
-        }
       console.error('Error submitting review:', error);
       setSubmissionStatus('error');
-      } finally {
+    } finally {
       setTimeout(() => setSubmissionStatus(null), 3000); 
     }
   };
-  
-
 
   const renderReviewForm = () => (
     <div className="review-form-box">
@@ -138,7 +115,6 @@ const App = () => {
                 size={24}
                 onClick={() => setRating(starValue)}
                 className={`star-selector-icon ${starValue <= rating ? 'selected' : ''}`}
-                style={{ fill: starValue <= rating ? 'gold' : 'transparent', stroke: '#A3836B' }}
               />
             ))}
           </div>
@@ -212,51 +188,42 @@ const App = () => {
   );
 
   return (
-    <React.Fragment>
-      <style>{internalStyles}</style>
-      <div className="reviews-container">
-        <div className="reviews-header-title">
-          <h1 className="page-title">Reviews from our Mariés Elégants</h1>
-        </div>
-        
-        <main className="reviews-main">
-          
-          {isUserSignedIn ? (
-            renderReviewForm()
-          ) : (
-            <div className="signed-out-message review-form-box">
-              <p className="signed-out-title text-xl font-bold">Please sign in to leave a review.</p>
-              <p className="signed-out-text text-gray-600">We value feedback from our authenticated customers.</p>
-            </div>
-          )}
-          
-          <div className="reviews-list-header">
-              <h3 className="list-title">
-                  Customer Testimonials ({reviews.length})
-              </h3>
-          </div>
-
-          {fetchError && (
-             <div className="error-message-fetch">
-                <p>⚠️ **{fetchError}**</p>
-                <p>Please ensure your backend is deployed and the **API_BASE** constant in this file is set correctly.</p>
-             </div>
-          )}
-
-          {isLoading && !fetchError && (
-            <div className="loading-message">Loading reviews...</div>
-          )}
-          
-          {!isLoading && reviews.length === 0 && !fetchError && (
-            <div className="empty-message">Be the first to leave a review!</div>
-          )}
-
-          <div className="reviews-list">
-            {reviews.map(renderReviewCard)}
-          </div>
-        </main>
+    <div className="reviews-container">
+      <div className="reviews-header-title">
+        <h1 className="page-title">Reviews from our Mariés Elégants
+</h1>
       </div>
-    </React.Fragment>
+      
+      <main className="reviews-main">
+        
+        {isUserSignedIn ? (
+          renderReviewForm()
+        ) : (
+          <div className="signed-out-message">
+            <p className="signed-out-title">Please sign in to leave a review.</p>
+            <p className="signed-out-text">We value feedback from our authenticated customers.</p>
+          </div>
+        )}
+        
+        <div className="reviews-list-header">
+            <h3 className="list-title">
+                Customer Testimonials ({reviews.length})
+            </h3>
+        </div>
+
+        {isLoading && (
+          <div className="loading-message">Loading reviews...</div>
+        )}
+        
+        {!isLoading && reviews.length === 0 && (
+          <div className="empty-message">Be the first to leave a review!</div>
+        )}
+
+        <div className="reviews-list">
+          {reviews.map(renderReviewCard)}
+        </div>
+      </main>
+    </div>
   );
 };
 
