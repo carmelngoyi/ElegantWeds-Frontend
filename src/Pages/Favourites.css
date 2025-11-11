@@ -1,0 +1,165 @@
+:root {
+    /* Reusing colors from existing CSS files */
+    --color-primary-light: #F9F0F2; /* Soft pinkish white */
+    --color-accent-1: #A3836B; /* Muted Gold/Brown - Primary accent */
+    --color-text-dark: #333333;
+    --color-text-light: #555555;
+    --color-button-hover: #9C898C; /* Muted Mauve */
+    --color-background: #FFFFFF;
+    --color-favorite-red: #B03A2E; /* Deep Red for the heart/remove action */
+}
+
+.favorites-page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+}
+
+.favorites-main-content {
+    flex-grow: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.page-title {
+    font-size: 3em;
+    font-weight: 300;
+    text-align: center;
+    color: var(--color-accent-1);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.page-subtitle {
+    font-size: 1.1em;
+    font-weight: 400;
+    text-align: center;
+    color: var(--color-text-light);
+    margin-bottom: 50px;
+}
+
+/* --- Empty State Message --- */
+.empty-message {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.1em;
+    color: var(--color-text-light);
+    border: 1px solid var(--color-primary-light);
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+.empty-message p {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+/* --- Favorites Grid and Card Styles --- */
+
+.favorites-grid {
+    display: grid;
+    /* Consistent grid layout with the other pages */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 30px;
+}
+
+.favorite-card {
+    background-color: var(--color-primary-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.favorite-image {
+    width: 100%;
+    height: 300px; /* Slightly shorter image for list view */
+    object-fit: cover;
+    display: block;
+}
+
+.favorite-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.favorite-name {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin: 0 0 5px 0;
+}
+
+.favorite-type {
+    font-size: 0.9em;
+    font-weight: 400;
+    color: var(--color-accent-1);
+    margin-bottom: 5px;
+}
+
+.favorite-price {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: var(--color-text-light);
+    margin-bottom: 15px;
+}
+
+/* --- Remove Button Style --- */
+
+.remove-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: var(--color-favorite-red);
+    color: var(--color-background);
+    border: none;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    margin-top: auto; /* Pushes the button to the bottom of the flex container */
+}
+
+.remove-button svg {
+    margin-right: 5px;
+}
+
+.remove-button:hover {
+    background-color: #8D2A20; /* Darker red on hover */
+    transform: translateY(-1px);
+}
+
+/* --- Responsive Adjustments --- */
+
+@media (max-width: 600px) {
+    .favorites-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    
+    .favorites-main-content {
+        padding: 20px 10px;
+    }
+
+    .page-title {
+        font-size: 2.2em;
+    }
+
+    .favorite-image {
+        height: 250px;
+    }
+}

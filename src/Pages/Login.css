@@ -1,64 +1,149 @@
-/* *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+
+.auth-container {
+  display: flex;
+  height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 
-body, .mainDiv {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-size: cover;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+.auth-left {
+  flex: 1;
+  background-color: #f7d9dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-.mainDiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: none; 
+.overlay-box {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  text-align: center;
 }
 
-form{
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
+.brand-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #444;
 }
+
+.brand-tagline {
+  color: #555;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
+/* RIGHT SIDE */
+.auth-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+.auth-box {
+  width: 380px;
+  text-align: left;
+}
+
 .welcome {
-    font-size: 2.5rem;
-    color: #333;
-    font-weight: bold;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
-#signin {
-    background-color: antiquewhite;
-    padding: 30px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-#signin h3 {
-    margin-bottom: 20px;
-    color: #333;
+.tabs button {
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+}
+
+.active-tab {
+  background-color: #ff0080;
+  color: white;
+  border: none;
+}
+
+.inactive-tab:hover {
+  border-color: #ff0080;
+  color: #ff0080;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-top: 10px;
 }
 
 input {
-    width: 100%;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    background: rgba(255,255,255,0.85);
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
 }
 
-p {
-    margin-top: 15px;
-    font-weight: bold;
-} */
+.pink-button {
+  background-color: #ff0080;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 1.5rem;
+  cursor: pointer;
+}
+
+.pink-button:hover {
+  background-color: #f56fb2;
+}
+
+.google-button {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.google-button:hover {
+  background-color: #f8f8f8;
+}
+
+.divider {
+  text-align: center;
+  margin: 1rem 0;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.forgot {
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+

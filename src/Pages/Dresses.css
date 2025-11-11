@@ -261,3 +261,23 @@ padding: 20px;
 font-size: 2em;
 }
 }
+
+.favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 45px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.favorite-button:hover {
+  transform: scale(1.1);
+  background-color: transparent;
+}
+
+.favorite-button.favorited svg {
+  fill: red;
+  color: red;
+}

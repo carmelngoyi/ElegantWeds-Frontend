@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Send, User, Star } from 'lucide-react';
 import './Reviews.css';
-import Navbar from '../Components/Navbar'; 
+import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 
-const MOCK_USER = {
-  _id: '654321fedcba9876543210', 
-  name: 'Cady Carnes',
-  email: 'cadycarnes@gmail.com',
-  base64AuthToken: 'amFuZUBleGFtcGxlLmNvbTpwYXNzd29yZDEyMw==' 
-};
-
 const API_BASE = import.meta.env.VITE_API_URL;
-const response = await fetch(`${API_BASE}/reviews`);
- 
 
 const RatingStars = ({ rating }) => {
   const fullStars = Math.floor(rating);
@@ -21,9 +12,9 @@ const RatingStars = ({ rating }) => {
 
   for (let i = 0; i < 5; i++) {
     stars.push(
-      <Star 
-        key={i} 
-        size={18} 
+      <Star
+        key={i}
+        size={18}
         className={i < fullStars ? 'star-filled' : 'star-empty'}
       />
     );
@@ -31,9 +22,9 @@ const RatingStars = ({ rating }) => {
   return <div className="rating-stars-container">{stars}</div>;
 };
 
-const App = () => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
-  const [isUserSignedIn, setIsUserSignedIn] = useState(false); 
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   const [reviewText, setReviewText] = useState('');
   const [rating, setRating] = useState(5);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,63 +32,65 @@ const App = () => {
 
   useEffect(() => {
     fetchReviews();
-    setIsUserSignedIn(MOCK_USER.base64AuthToken !== ''); 
+
+    const storedToken = localStorage.getItem('authToken');
+    setIsUserSignedIn(!!storedToken);
   }, []);
 
   const fetchReviews = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(`${API_BASE_URL}/reviews`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch reviews');
-      }
+      const response = await fetch(`${API_BASE}/reviews`);
+      if (!response.ok) throw new Error('Failed to fetch reviews');
+
       const data = await response.json();
-      setReviews(data.reverse()); 
+      setReviews(data.reverse());
     } catch (error) {
       console.error('Error fetching reviews:', error);
     } finally {
       setIsLoading(false);
     }
   };
+
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     if (!reviewText || !isUserSignedIn) return;
 
     setSubmissionStatus('submitting');
 
+    const authToken = localStorage.getItem('authToken');
+
     const newReview = {
-      rating: rating,
-      reviewText: reviewText,
+      rating,
+      reviewText,
     };
 
     try {
-      const response = await fetch(`${API_BASE_URL}/reviews`, {
+      const response = await fetch(`${API_BASE}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Basic ${MOCK_USER.base64AuthToken}`, 
+          'Authorization': `Basic ${authToken}`,
         },
         body: JSON.stringify(newReview),
       });
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error("Submission failed:", errorText);
+        console.error('Submission failed:', errorText);
         throw new Error('Unauthorized or failed to post review.');
       }
 
       const result = await response.json();
-      
-      setReviews([result.review, ...reviews]); 
+      setReviews([result.review, ...reviews]);
       setReviewText('');
       setRating(5);
       setSubmissionStatus('success');
-
     } catch (error) {
       console.error('Error submitting review:', error);
       setSubmissionStatus('error');
     } finally {
-      setTimeout(() => setSubmissionStatus(null), 3000); 
+      setTimeout(() => setSubmissionStatus(null), 3000);
     }
   };
 
@@ -105,30 +98,31 @@ const App = () => {
     <div className="review-form-box">
       <h2 className="form-title">Share Your Experience</h2>
       <form onSubmit={handleReviewSubmit}>
-        
         <div className="rating-picker">
-          <label className="rating-label">Your Rating:</label>
+          <label className="rating-label">Please Leave Your Rating:</label>
           <div className="star-selector-container">
             {[1, 2, 3, 4, 5].map((starValue) => (
-              <Star 
+              <Star
                 key={starValue}
                 size={24}
                 onClick={() => setRating(starValue)}
-                className={`star-selector-icon ${starValue <= rating ? 'selected' : ''}`}
+                className={`star-selector-icon ${
+                  starValue <= rating ? 'selected' : ''
+                }`}
               />
             ))}
           </div>
         </div>
-        
+
         <textarea
           value={reviewText}
           onChange={(e) => setReviewText(e.target.value)}
-          placeholder={`Leave your review here, ${MOCK_USER.name}...`}
+          placeholder="Leave your review here..."
           rows="4"
           className="review-textarea"
           required
         ></textarea>
-        
+
         <div className="submission-controls">
           {submissionStatus === 'submitting' && (
             <span className="submission-status submitting">
@@ -137,10 +131,14 @@ const App = () => {
             </span>
           )}
           {submissionStatus === 'success' && (
-            <span className="submission-status success">Review Posted Successfully!</span>
+            <span className="submission-status success">
+              Review Posted Successfully!
+            </span>
           )}
           {submissionStatus === 'error' && (
-            <span className="submission-status error">Error posting review. Try again.</span>
+            <span className="submission-status error">
+              Error posting review. Try again.
+            </span>
           )}
 
           <button
@@ -170,61 +168,51 @@ const App = () => {
       <div className="reviewer-info-header">
         <div className="reviewer-details">
           <User size={20} className="user-icon" />
-          <p className="reviewer-name">
-            {review.userName || 'Anonymous User'}
-          </p>
+          <p className="reviewer-name">{review.userName || 'Anonymous User'}</p>
         </div>
         <RatingStars rating={review.rating} />
       </div>
 
-      <p className="review-text">
-        "{review.reviewText}"
-      </p>
-
-      <p className="review-date">
-        Posted on {formatDate(review.createdAt)}
-      </p>
+      <p className="review-text">"{review.reviewText}"</p>
+      <p className="review-date">Posted on {formatDate(review.createdAt)}</p>
     </div>
   );
 
   return (
     <div className="reviews-container">
       <div className="reviews-header-title">
-        <h1 className="page-title">Reviews from our Mariés Elégants
-</h1>
+        <h1 className="page-title">Reviews from our Mariés Élégants</h1>
       </div>
-      
+
       <main className="reviews-main">
-        
         {isUserSignedIn ? (
           renderReviewForm()
         ) : (
           <div className="signed-out-message">
-            <p className="signed-out-title">Please sign in to leave a review.</p>
-            <p className="signed-out-text">We value feedback from our authenticated customers.</p>
+            <p className="signed-out-title">Please <a href='login'>sign in</a> to leave a review.</p>
+            <p className="signed-out-text">
+              You can still read what others have said below.
+            </p>
           </div>
         )}
-        
+
         <div className="reviews-list-header">
-            <h3 className="list-title">
-                Customer Testimonials ({reviews.length})
-            </h3>
+          <h3 className="list-title">
+            Customer Testimonials ({reviews.length})
+          </h3>
         </div>
 
-        {isLoading && (
-          <div className="loading-message">Loading reviews...</div>
-        )}
-        
+        {isLoading && <div className="loading-message">Loading reviews...</div>}
+
         {!isLoading && reviews.length === 0 && (
           <div className="empty-message">Be the first to leave a review!</div>
         )}
 
-        <div className="reviews-list">
-          {reviews.map(renderReviewCard)}
-        </div>
+        <div className="reviews-list">{reviews.map(renderReviewCard)}</div>
       </main>
+
     </div>
   );
 };
 
-export default App;
+export default Reviews;
