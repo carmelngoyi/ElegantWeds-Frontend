@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"; // Import useLocation
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom"; // Import useLocation
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import Homepage from "./Pages/Homepage";
@@ -26,13 +26,14 @@ function Layout() {
       {shouldShowNavAndFooter && <Navbar />}
 
       <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Homepage />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Homepage />} />
         <Route path="/accessories" element={<Accessories />} />
         <Route path="/dresses" element={<Dresses />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/bookings" element={<Bookings />} />
-        <Route path="/signup" element={<SignUp />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
