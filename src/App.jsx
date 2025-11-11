@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom"; // Import useLocation
+import React, { useContext } from "react";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import Homepage from "./Pages/Homepage";
@@ -11,45 +11,82 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import Reviews from "./Pages/Reviews";
 import Favorites from "./Pages/Favorites";
-import { getFavorites, toggleFavorite, isFavorite } from './Favourite.js';
-import { AuthProvider } from "./Pages/AuthContext";
+import { getFavorites, toggleFavorite, isFavorite } from "./Favourite.js";
+import { AuthProvider, AuthContext } from "./Pages/AuthContext";
 
 function Layout() {
   const location = useLocation();
-
   const excludedPaths = ["/login", "/signup"];
-
   const shouldShowNavAndFooter = !excludedPaths.includes(location.pathname);
 
+  // Get login status from localStorage or AuthContext
+  const { user } = useContext(AuthContext); // assuming your AuthContext provides user info
+  const isAuthenticated = !!user; // true if user is logged in
+
   return (
-    <AuthProvider>
+    <div>
       {shouldShowNavAndFooter && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/home" element={<Homepage />} />
-        <Route path="/accessories" element={<Accessories />} />
-        <Route path="/dresses" element={<Dresses />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/bookings" element={<Bookings />} />
-        <Route path="/reviews" element={<Reviews />} />
-        <Route path="/favorites" element={<Favorites />} />
+        {/* Root redirects based on login status */}
+        <Route
+          path="/"
+          element={isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />}
+        />
+
+        {/* Auth pages */}
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/home" replace /> : <Login />}
+        />
+        <Route
+          path="/signup"
+          element={isAuthenticated ? <Navigate to="/home" replace /> : <SignUp />}
+        />
+
+        {/* Protected pages */}
+        <Route
+          path="/home"
+          element={isAuthenticated ? <Homepage /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/accessories"
+          element={isAuthenticated ? <Accessories /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/dresses"
+          element={isAuthenticated ? <Dresses /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/about-us"
+          element={isAuthenticated ? <AboutUs /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/bookings"
+          element={isAuthenticated ? <Bookings /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/reviews"
+          element={isAuthenticated ? <Reviews /> : <Navigate to="/login" replace />}
+        />
+        <Route
+          path="/favorites"
+          element={isAuthenticated ? <Favorites /> : <Navigate to="/login" replace />}
+        />
       </Routes>
 
       {shouldShowNavAndFooter && <Footer />}
-    </AuthProvider>
+    </div>
   );
 }
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <Layout />
-      </BrowserRouter>
-    </div>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
