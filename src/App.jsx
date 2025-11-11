@@ -26,12 +26,12 @@ function Layout() {
       {shouldShowNavAndFooter && <Navbar />}
 
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Homepage />} />
         <Route path="/accessories" element={<Accessories />} />
         <Route path="/dresses" element={<Dresses />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/bookings" element={<Bookings />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/favorites" element={<Favorites />} />
