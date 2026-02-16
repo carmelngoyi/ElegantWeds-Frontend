@@ -11,7 +11,6 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import Reviews from "./Pages/Reviews";
 import Favorites from "./Pages/Favorites";
-import { getFavorites, toggleFavorite, isFavorite } from "./Favourite.js";
 import { AuthProvider, AuthContext } from "./Pages/AuthContext";
 
 function Layout() {
@@ -19,16 +18,15 @@ function Layout() {
   const excludedPaths = ["/login", "/signup"];
   const shouldShowNavAndFooter = !excludedPaths.includes(location.pathname);
 
-  // Get login status from localStorage or AuthContext
-  const { user } = useContext(AuthContext); // assuming your AuthContext provides user info
-  const isAuthenticated = !!user; // true if user is logged in
+  const { user } = useContext(AuthContext);
+  const isAuthenticated = !!user;
 
   return (
-    <div>
+    <>
       {shouldShowNavAndFooter && <Navbar />}
 
       <Routes>
-        {/* Root redirects based on login status */}
+        {/* Home route */}
         <Route
           path="/"
           element={isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />}
@@ -73,10 +71,16 @@ function Layout() {
           path="/favorites"
           element={isAuthenticated ? <Favorites /> : <Navigate to="/login" replace />}
         />
+
+        {/* Catch-all: redirect unknown routes to home/login */}
+        <Route
+          path="*"
+          element={isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />}
+        />
       </Routes>
 
       {shouldShowNavAndFooter && <Footer />}
-    </div>
+    </>
   );
 }
 

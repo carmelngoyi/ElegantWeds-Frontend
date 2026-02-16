@@ -30,7 +30,7 @@ const AccessoryDetailModal = ({ accessory, onClose }) => {
           <X size={24} />
         </button>
 
-        {/* ❤️ Add-to-Favorite Button */}
+        {/* Add-to-Favorite Button */}
         <button
           className={`favorite-button ${favorited ? 'favorited' : ''}`}
           onClick={handleFavorite}

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext.jsx";
 import "./Login.css";
 
@@ -7,15 +7,17 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login, user } = useContext(AuthContext);
 
-  // ✅ Redirect if already logged in
+  // If already logged in, redirect to /home
+  // if (user) return <Navigate to="/home" replace />;
+
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      navigate("/");
-    }
-  }, [navigate]);
+  if (user) {
+    navigate("/home", { replace: true });
+  }
+}, [user, navigate]);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -46,12 +48,15 @@ const Login = () => {
         window.alert("Login Successful!");
       }
 
-      // ✅ Save credentials in localStorage
+      // Save credentials in localStorage
       localStorage.setItem("authToken", credentials);
       localStorage.setItem("userEmail", email);
 
+      // Update AuthContext
       login(data.user);
-      navigate("/"); // ✅ Redirect to homepage
+
+      // Navigate after login
+      navigate("/home");
     } catch (err) {
       console.error(err);
       setError("Error signing in. Please try again.");

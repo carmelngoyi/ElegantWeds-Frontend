@@ -5,41 +5,18 @@ import { getFavorites, toggleFavorite, isFavorite } from "../Favourite.js";
 
 const FAVORITES_KEY = 'elegantWedsFavorites';
 
-// const getFavorites = () => {
-//   const favorites = localStorage.getItem(FAVORITES_KEY);
-//   return favorites ? JSON.parse(favorites) : [];
-// };
-
-// const toggleFavorite = (itemId) => {
-//   let favorites = getFavorites();
-//   const index = favorites.indexOf(itemId);
-
-//   if (index > -1) {
-//     favorites.splice(index, 1);
-//   } else {
-//     favorites.push(itemId);
-//   }
-  
-//   localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
-//   window.dispatchEvent(new CustomEvent('favoritesUpdated', { detail: favorites }));
-  
-//   return index === -1;
-// };
-
-
 
 const fetchItemDetails = async (id, type) => {
     try {
         const API_BASE = import.meta.env.VITE_API_URL;
-        const endpoint = type === 'dress' ? `/dresses/${id}` : `/accessories/${id}`; 
+        const endpoint = type === 'dress' ? `/dresses/${name}` : `/accessories/${name}`; 
         
        return {
             _id: id,
             name: `${type} item ${id}`,
             type: type,
-            price_range: 'R35000 - R70000',
-            image_placeholder_url: 'path/to/placeholder-image.jpg',
-            // ... other details
+            price_range: '',
+            image_placeholder_url: '',
         };
 
     } catch (error) {
