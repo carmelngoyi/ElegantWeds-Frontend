@@ -3,24 +3,28 @@ import React, { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
 
-  // Load user from localStorage on app start
+  // Load user from localStorage ONCE
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  // Keep localStorage in sync
   useEffect(() => {
-    const storedUser = localStorage.getItem("userEmail");
-    if (storedUser) {
-      setUser({ email: storedUser });
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
     }
-  }, []);
+  }, [user]);
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem("userEmail", userData.email);
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("userEmail");
   };
 
   return (
