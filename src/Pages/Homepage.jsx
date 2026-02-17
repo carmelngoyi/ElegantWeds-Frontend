@@ -1,9 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Homepage.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Autoplay } from 'swiper/modules'; 
+
 import image1 from '../assets/a-line1.jpg'; 
 import image2 from '../assets/bride-veil.jpg'; 
 import image3 from '../assets/Camelia1.jpg'; 
@@ -12,8 +13,6 @@ import Amelia from '../assets/Amelia44023_a.webp';
 import Nino from '../assets/a-line2.png';  
 import Leonie from '../assets/ball-gown1.jpeg';  
 import Amour from '../assets/a-line3.jpg';  
-import Navbar from '../Components/Navbar'; 
-import Footer from '../Components/Footer'; 
 
 const heroImages = [image1, image2, image3, image4];
 
@@ -25,6 +24,8 @@ const featuredDresses = [
 ];
 
 const Homepage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="homepage-container">
       <main className="homepage">
@@ -33,7 +34,12 @@ const Homepage = () => {
           <p className="hero-subtitle">
             Crafting the dress of your dreams for the most unforgettable day. Hire or purchase your perfect wedding gown with us.
           </p>
-          <button className="cta-button"><a href="/dresses">View Our Collections</a></button>
+          <button 
+            className="cta-button"
+            onClick={() => navigate("/dresses")}
+          >
+            View Our Collections
+          </button>
         </div>
 
         <div className="image-swiper-column">
@@ -60,7 +66,6 @@ const Homepage = () => {
 
       <section className="featured-dresses-section">
         <h2 className="featured-dresses-heading">OFFERING LUXURY WEDDING GOWNS</h2>
-        
         <div className="dress-grid">
           {featuredDresses.map((dress) => (
             <div key={dress.name} className="dress-card">
@@ -75,7 +80,6 @@ const Homepage = () => {
             </div>
           ))}
         </div>
-        
       </section>
     </div>
   );

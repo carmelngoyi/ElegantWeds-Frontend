@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { X, Calendar, Heart } from 'lucide-react';
 import './Accessories.css';
 import { toggleFavorite, isFavorite } from "../Favourite.js";
 import veil from '../assets/bride-veil.jpg';
 
-const BOOKING_LINK = "/bookings";
-
 const AccessoryDetailModal = ({ accessory, onClose }) => {
+  const navigate = useNavigate();
   const [favorited, setFavorited] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,6 @@ const AccessoryDetailModal = ({ accessory, onClose }) => {
           <X size={24} />
         </button>
 
-        {/* Add-to-Favorite Button */}
         <button
           className={`favorite-button ${favorited ? 'favorited' : ''}`}
           onClick={handleFavorite}
@@ -44,126 +43,22 @@ const AccessoryDetailModal = ({ accessory, onClose }) => {
             <img className='modal-image' src={accessory.image_placeholder_url || accessory.image} alt={accessory.accessory_name} />
             <h2 className="modal-title">{accessory.name}</h2>
             <p className="modal-price">Price Range: {accessory.price_range}</p>
+
             <div className="modal-description-block">
               <h3>Description</h3>
               <p>{accessory.description}</p>
             </div>
 
-            <a href={BOOKING_LINK} className="modal-booking-button">
+            <button
+              className="modal-booking-button"
+              onClick={() => navigate("/bookings")}
+            >
               <Calendar size={20} style={{ marginRight: '8px' }} />
               Book a Private Consultation
-            </a>
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-const Accessories = () => {
-  const [accessories, setAccessories] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedAccessories, setSelectedAccessory] = useState(null);
-
-  useEffect(() => {
-    const fetchAccessories = async () => {
-      try {
-        const API_BASE = import.meta.env.VITE_API_URL;
-        const response = await fetch(`${API_BASE}/accessories`);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const mappedData = data.map((d, index) => ({
-          ...d,
-          _id: d._id || `mock-${index + 1}`
-        }));
-
-        setAccessories(mappedData);
-        setError(null);
-      } catch (err) {
-        console.error("Failed to fetch accessories:", err);
-        setError("Failed to load accessory catalog. Please ensure the backend is running and the /accessories endpoint is active.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAccessories();
-  }, []);
-
-  const openModal = (accessory) => {
-    setSelectedAccessory(accessory);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeModal = () => {
-    setSelectedAccessory(null);
-    document.body.style.overflow = 'unset';
-  };
-
-  return (
-    <div className="accessories-page-container">
-      <section className="about-hero-banner">
-        <div className="banner-image-container">
-          <img
-            src={veil}
-            alt="Bride wearing a veil"
-            className="banner-image"
-          />
-
-          <div className="quote-overlay-text">
-            <p className="quote-text">
-              It was always you... and a little sparkle
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <main className="accessories-main-content">
-        <h1 className="page-title">The Bridal Collection</h1>
-        <p className="page-subtitle">Explore our exclusive selection of luxury wedding accessories.</p>
-
-        {isLoading && <div className="loading-message">Loading the elegant collection...</div>}
-        {error && <div className="error-message">{error}</div>}
-
-        {!isLoading && !error && accessories.length === 0 && (
-          <div className="empty-message">
-            No accessories found. Please add items to the "accessories" collection in MongoDB.
-          </div>
-        )}
-
-        <div className="accessories-grid">
-          {accessories.map((accessory) => (
-            <div
-              key={accessory._id}
-              className="accessory-card"
-              onClick={() => openModal(accessory)}
-              role="button"
-              tabIndex="0"
-            >
-              <div className="accessory-info">
-                <img
-                  className="accessory-image"
-                  src={accessory.image_placeholder_url || accessory.image || veil}
-                  alt={accessory.name}
-                />
-                <h3 className="accessory-name">{accessory.name}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      <AccessoryDetailModal
-        accessory={selectedAccessories}
-        onClose={closeModal}
-      />
-    </div>
-  );
-};
-
-export default Accessories;
