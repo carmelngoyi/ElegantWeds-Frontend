@@ -75,7 +75,7 @@ function Layout() {
         {/* Catch-all: redirect unknown routes to home/login */}
         <Route
           path="*"
-          element={isAuthenticated ? <Navigate to="/home" replace /> : <Navigate to="/login" replace />}
+          element={<Navigate to="/" replace /> }
         />
       </Routes>
 
